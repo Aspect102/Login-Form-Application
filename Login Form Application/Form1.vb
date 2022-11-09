@@ -1,15 +1,25 @@
-﻿Imports Microsoft.VisualBasic.ApplicationServices
-
+﻿
 Public Class Form1
-    Dim pathname As String
-    Dim UserDatabaseFile As System.IO.StreamReader
+    Public userDatabaseFileLocation
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        UserDatabaseFile = My.Computer.FileSystem.OpenTextFileReader(pathname & "UserDatabaseFile.txt")
-        pathname = Application.StartupPath
+
         Form2.Visible = False
     End Sub
 
     Private Sub BTN_Login_Click(sender As Object, e As EventArgs) Handles BTN_Login.Click
+        userDatabaseFileLocation = Application.StartupPath() & "\UserDatabaseFile.txt"
+        Dim reader As System.IO.StreamReader
+        reader = My.Computer.FileSystem.OpenTextFileReader(userDatabaseFileLocation)
+        Dim PasswordSearch As String = TXT_Password.Text
+        Dim UsernameSearch As String = TXT_Username.Text
+
+        For Each entry As User In Form2.UserDatabaseList
+            Dim lineoftext = reader.ReadLine()
+            If PasswordSearch = entry.password And UsernameSearch = entry.username Then
+
+
+            End If
+        Next
 
     End Sub
 
@@ -21,13 +31,13 @@ Public Class Form1
 End Class
 
 Public Class User
-    Public Property usernameEntered As String
-    Public Property passwordEntered As String
+    Public Property username As String
+    Public Property password As String
     Public Property uniqueIdentifier As String
 
-    Public Sub New(usernameEntered As String, passwordEntered As String)
-        Me.usernameEntered = usernameEntered
-        Me.passwordEntered = passwordEntered
+    Public Sub New(username As String, password As String)
+        Me.username = username
+        Me.password = password
         Dim uniqueIdentifier As String
         Randomize() 'randomise seed based on system time
         uniqueIdentifier = Int((99999999 - 0 + 1) * Rnd() + 0) 'Int((upperbound - lowerbound + 1) * Rnd + lowerbound)

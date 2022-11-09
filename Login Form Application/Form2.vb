@@ -1,6 +1,4 @@
-﻿Imports Form1
-Imports User
-
+﻿
 Public Class Form2
     Public UserDatabaseList As New List(Of User)
     Private Sub Label1_Click(sender As Object, e As EventArgs) Handles LBL_ConfirmPassword.Click
@@ -18,9 +16,7 @@ Public Class Form2
     End Sub
 
     Private Sub BTN_CreateAccountConfirm_Click(sender As Object, e As EventArgs) Handles BTN_CreateAccountConfirm.Click
-        Dim ConfirmPasswordEntered As String
-        Dim PasswordEntered As String
-        Dim UsernameEntered As String
+        Dim ConfirmPasswordEntered, PasswordEntered, UsernameEntered, line As String
 
         ConfirmPasswordEntered = TXT_ConfirmPassword.Text
         PasswordEntered = TXT_CreatePassword.Text
